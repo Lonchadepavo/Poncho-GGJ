@@ -3,37 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MenuManager : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public class MenuManager : MonoBehaviour {
+  public void startPlay() {
+    SceneManager.LoadScene("level 1", LoadSceneMode.Single);
+  }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  public void Exit() {
+    Application.Quit();
+  }
 
-    public void startPlay()
-    {
-        SceneManager.LoadScene("level 1", LoadSceneMode.Single);
-    }
+  public void Credits() {
+    SceneManager.LoadScene("Credits", LoadSceneMode.Single);
+  }
 
-    public void Exit()
-    {
-        Application.Quit();
-    }
-
-    public void Credits()
-    {
-        SceneManager.LoadScene("Credits", LoadSceneMode.Single);
-    }
-
-    void OnTriggerEnter(Collider other) {
-        SceneManager.LoadScene("Credits", LoadSceneMode.Single);
-    }
+  void OnTriggerEnter(Collider other) {
+    Credits();
+  }
 
 }

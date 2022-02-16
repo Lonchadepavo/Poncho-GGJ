@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour {
-  //El jugador tiene dos modos de movimiento, el modo 2d y el modo 3d
   GameManager gm_instance_;
   CharacterController cc_;
 
@@ -13,7 +12,7 @@ public class CharacterMovement : MonoBehaviour {
   public float movement_speed_;
   public float jump_speed_;
   public float gravity_apply_speed_;
-  //Usar la curva de salto para establecer la fuerza que se aplica hacia arriba.
+
   public AnimationCurve jump_curve_;
 
   public float gravity_;
