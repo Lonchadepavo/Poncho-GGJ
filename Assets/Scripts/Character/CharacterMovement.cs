@@ -159,16 +159,46 @@ public class CharacterMovement : MonoBehaviour {
 
   void CheckFloor() {
     RaycastHit hit;
+
+    //Dibujar 3 rayos en 2d, el central, left y right.
+    //Dibujar 9 rayos en 3d, 3 por cada fila
+    Vector3 left_ray = new Vector3( floor_raycast_origin_.transform.position.x - 0.25f, 
+                                    floor_raycast_origin_.transform.position.y, 
+                                    floor_raycast_origin_.transform.position.z);
+
+    Vector3 right_ray = new Vector3( floor_raycast_origin_.transform.position.x + 0.25f, 
+                                    floor_raycast_origin_.transform.position.y, 
+                                    floor_raycast_origin_.transform.position.z);
+
+    Vector3 back_ray = new Vector3( floor_raycast_origin_.transform.position.x, 
+                                    floor_raycast_origin_.transform.position.y, 
+                                    floor_raycast_origin_.transform.position.z - 0.25f);
+
+    Vector3 front_ray = new Vector3( floor_raycast_origin_.transform.position.x, 
+                                    floor_raycast_origin_.transform.position.y, 
+                                    floor_raycast_origin_.transform.position.z + 0.25f);
+
     Debug.DrawRay(floor_raycast_origin_.transform.position, -floor_raycast_origin_.transform.up * 0.5f, Color.red);
-    if (Physics.Raycast(floor_raycast_origin_.transform.position, -floor_raycast_origin_.transform.up, out hit, 0.5f)){
+    Debug.DrawRay(left_ray, -floor_raycast_origin_.transform.up * 0.5f, Color.red);
+    Debug.DrawRay(right_ray, -floor_raycast_origin_.transform.up * 0.5f, Color.red);
+    Debug.DrawRay(front_ray, -floor_raycast_origin_.transform.up * 0.5f, Color.red);
+    Debug.DrawRay(back_ray, -floor_raycast_origin_.transform.up * 0.5f, Color.red);
+
+    if (Physics.Raycast(floor_raycast_origin_.transform.position, -floor_raycast_origin_.transform.up, out hit, 0.5f) ||
+      Physics.Raycast(left_ray, -floor_raycast_origin_.transform.up, out hit, 0.5f) ||
+      Physics.Raycast(right_ray, -floor_raycast_origin_.transform.up, out hit, 0.5f) || 
+      Physics.Raycast(front_ray, -floor_raycast_origin_.transform.up, out hit, 0.5f) ||
+      Physics.Raycast(back_ray, -floor_raycast_origin_.transform.up, out hit, 0.5f)){
+
       is_grounded_ = hit.transform.GetComponent<IJumpable>() != null;
       if (is_grounded_) { 
         anim_controller_.SetAnimatorBoolParameter(CharAnimController.AnimatorBoolParameters.APB_HasJumped, false);
       }
       StartCoroutine(CooldownJump());
+
     } else {
       is_grounded_ = false;
-    }
+    } 
   }
 
   void ApplyGravity() {
@@ -197,6 +227,5 @@ public class CharacterMovement : MonoBehaviour {
       }
     }
   }
-
 }
 

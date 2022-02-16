@@ -42,7 +42,7 @@ public class Talkable : MonoBehaviour, IInteract, IJumpable {
     if (Input.GetMouseButtonDown(0)) {
       current_dialogue++;
       if (dialogues.Length == current_dialogue) {
-          closeDialogues();
+        closeDialogues();
       }
 
       else {
@@ -59,7 +59,7 @@ public class Talkable : MonoBehaviour, IInteract, IJumpable {
     }
     else if (GameManager.gm_instance_.camera_mode_ == GameManager.GameMode.Mode3D) {
       master3d_.SetActive(true);
-       master2d_.SetActive(false);            
+      master2d_.SetActive(false);            
     }
   }
 }
